@@ -53,19 +53,19 @@ onAuthStateChanged(auth, (user) => {
                     <hr class="mt-0 mb-4">
                     <div class="row pt-1">
                       <div class="col-6 mb-3">
-                       <button type="button" class="btn btn-success" id="verifyEmail">Verify your email</button>
+                       <button type="button" class="button-85" id="verifyEmail">Verify your email</button>
                       </div>
                       <div class="col-6 mb-3">
-                        <button type="button" class="btn btn-success" id="updateProfile">Update profile</button>
+                        <button type="button" class="button-85" id="updateProfile">Update profile</button>
                       </div>
                       <div class="col-6 mb-3">
-                        <button type="button" class="btn btn-success" id="updateEmail">Update Email</button>
+                        <button type="button" class="button-85" id="updateEmail">Update Email</button>
                       </div>
                       <div class="col-6 mb-3">
-                                <button type="button" class="btn btn-danger" id="deleteAccount">Delete Account</button>
+                                <button type="button" class="button-85" id="deleteAccount">Delete Account</button>
                       </div>
                       <div class="col-6 mb-3">
-                       <button type="button" class="btn btn-success" id="signOut">Sign Out</button>
+                       <button type="button" class="button-85" id="signOut">Sign Out</button>
                       </div>
                     </div>
                     <div class="d-flex justify-content-evenly  w-50">

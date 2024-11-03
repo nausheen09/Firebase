@@ -1,15 +1,20 @@
 // importing
-import { getAuth, createUserWithEmailAndPassword } from "./firebase.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider,  createUserWithEmailAndPassword } from "./firebase.js";
+// import Swal from "sweetalert2";
 
 const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
 
 
+let googleLoginBtn = document.getElementById("googleLoginBtn");
 let signupBtn = document.getElementById("signupBtn");
 let signupEmail = document.getElementById("signupEmail");
 let signupPassword = document.getElementById("signupPassword");
 
 // Regular expression to validate email format
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
 
 signupBtn.addEventListener("click", () => {
     // Check if fields are not empty and if email follows the valid format
@@ -32,6 +37,7 @@ signupBtn.addEventListener("click", () => {
                 console.log(user);
                 location.href = "signin.html";
             })
+
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -57,6 +63,40 @@ signupBtn.addEventListener("click", () => {
     // location.href = "signin.html";
 });
 
+             
+// Google Sign-In
+googleLoginBtn.addEventListener("click", () => {
+    signInWithPopup(auth, googleProvider)
+        .then((result) => {
+            // Access token for Google API
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+
+            // The signed-in user info
+            const user = result.user;
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Logged in with Google!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            console.log(user);
+
+            // Redirect to profile page
+            location.href = "profile.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            Swal.fire({
+                title: "Error!",
+                text: "Google sign-in failed",
+                icon: "error"
+            });
+        });
+});
 
 
 
