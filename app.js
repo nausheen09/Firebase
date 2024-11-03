@@ -30,6 +30,7 @@ signupBtn.addEventListener("click", () => {
                     timer: 1500
                   });
                 console.log(user);
+                location.href = "signin.html";
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -53,7 +54,7 @@ signupBtn.addEventListener("click", () => {
         // console.log("");
     }
 
-    location.href = "signin.html";
+    // location.href = "signin.html";
 });
 
 
