@@ -71,20 +71,20 @@ googleLoginBtn.addEventListener("click", () => {
             // Access token for Google API
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
-
-            // The signed-in user info
+            
+             // The signed-in user info
             const user = result.user;
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Logged in with Google!",
-                showConfirmButton: false,
-                timer: 1500
-            });
-            console.log(user);
-
-            // Redirect to profile page
-            location.href = "profile.html";
+            setTimeout(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Logged in with Google!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log(user);
+                location.href = "dashboard.html";
+            }, 1500);
         })
         .catch((error) => {
             const errorCode = error.code;
