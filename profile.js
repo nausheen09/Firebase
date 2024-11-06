@@ -214,7 +214,7 @@ onAuthStateChanged(auth, (user) => {
                       });
                       console.log("User deleted.");
                       // Redirect or perform any other necessary action
-                      location.href = "login.html"; // Redirect to login page or another page
+                      location.href = "index.html"; // Redirect to login page or another page
                   }).catch((error) => {
                       console.log(error);
                       Swal.fire({
