@@ -1,8 +1,8 @@
 // importing
-import { getAuth, signInWithPopup, GoogleAuthProvider,  createUserWithEmailAndPassword } from "./firebase.js";
+import {collection, addDoc, auth, db, signInWithPopup, GoogleAuthProvider,  createUserWithEmailAndPassword } from "./firebase.js";
 // import Swal from "sweetalert2";
 
-const auth = getAuth();
+// const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
 
@@ -10,20 +10,38 @@ let googleLoginBtn = document.getElementById("googleLoginBtn");
 let signupBtn = document.getElementById("signupBtn");
 let signupEmail = document.getElementById("signupEmail");
 let signupPassword = document.getElementById("signupPassword");
+let phoneNO = document.getElementById("phoneNO");
+let fullname = document.getElementById("fullname");
+
+let users = {
+    phoneNumer : phoneNO.value,
+    fullName: fullname.value
+}
 
 // Regular expression to validate email format
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 
-signupBtn.addEventListener("click", () => {
+signupBtn.addEventListener("click", async() => {
     // Check if fields are not empty and if email follows the valid format
     if (signupEmail.value.trim() && signupPassword.value.trim()) {
         if (!emailPattern.test(signupEmail.value)) {
             console.log("Please enter a valid email address");
             return;
         }
-        
+        // ------------firestore-----
+        try {
+            const docRef = await addDoc(collection(db, "users"), {
+              ...users
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        //   ---------
+
+
         createUserWithEmailAndPassword(auth, signupEmail.value, signupPassword.value)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -35,7 +53,7 @@ signupBtn.addEventListener("click", () => {
                     timer: 1500
                   });
                 console.log(user);
-                location.href = "signin.html";
+                // location.href = "signin.html";
             })
 
             .catch((error) => {
@@ -57,7 +75,6 @@ signupBtn.addEventListener("click", () => {
     } 
     else {
         Swal.fire("Please enter your data.!");
-        // console.log("");
     }
 
     // location.href = "signin.html";
